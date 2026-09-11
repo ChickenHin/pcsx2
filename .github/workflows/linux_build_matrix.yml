@@ -1,12 +1,7 @@
 name: 🐧 Linux Builds
 
 on:
-  push:
-    branches-ignore:
-      - "l10n_master"
-  pull_request:
-    branches:
-      - master
+  workflow_dispatch: 
 
 jobs:
   build_linux_qt:
@@ -19,7 +14,7 @@ jobs:
       compiler: clang
       cmakeflags: ""
       buildAppImage: true
-    secrets: inherit
+    # secrets: inherit
   build_linux_debug:
     name: "Debug"
     if: github.repository != 'PCSX2/pcsx2' || github.event_name == 'pull_request'
@@ -31,7 +26,7 @@ jobs:
       cmakeflags: ""
       buildAppImage: true
       cmakeBuildType: Debug
-    secrets: inherit
+    # secrets: inherit
   build_linux_flatpak:
     name: "Flatpak"
     if: github.repository != 'PCSX2/pcsx2' || github.event_name == 'pull_request'
@@ -42,4 +37,4 @@ jobs:
       compiler: clang
       cmakeflags: ""
       publish: false
-    secrets: inherit
+    # secrets: inherit
