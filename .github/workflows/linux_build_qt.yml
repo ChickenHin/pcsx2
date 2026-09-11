@@ -163,18 +163,18 @@ jobs:
         working-directory: ./build
         run: ninja unittests
 
-      - name: Package AppImage
-        if: inputs.buildAppImage == true
-        env:
-          NAME: ${{ steps.artifact-metadata.outputs.artifact-name }}
-        run: |
-          .github/workflows/scripts/linux/appimage-qt.sh "$(realpath .)" "$(realpath ./build)" "$HOME/deps" "$NAME"
-          mkdir -p "$GITHUB_WORKSPACE"/ci-artifacts/
-          mv "${NAME}.AppImage" "$GITHUB_WORKSPACE"/ci-artifacts/
+      # - name: Package AppImage
+      #   if: inputs.buildAppImage == true
+      #   env:
+      #     NAME: ${{ steps.artifact-metadata.outputs.artifact-name }}
+      #   run: |
+      #     .github/workflows/scripts/linux/appimage-qt.sh "$(realpath .)" "$(realpath ./build)" "$HOME/deps" "$NAME"
+      #     mkdir -p "$GITHUB_WORKSPACE"/ci-artifacts/
+      #     mv "${NAME}.AppImage" "$GITHUB_WORKSPACE"/ci-artifacts/
 
-      - name: Upload artifact
-        if: inputs.buildAppImage == true
-        uses: actions/upload-artifact@v7
-        with:
-          name: ${{ steps.artifact-metadata.outputs.artifact-name }}
-          path: ci-artifacts
+      # - name: Upload artifact
+      #   if: inputs.buildAppImage == true
+      #   uses: actions/upload-artifact@v7
+      #   with:
+      #     name: ${{ steps.artifact-metadata.outputs.artifact-name }}
+      #     path: ci-artifacts
